@@ -1,0 +1,7 @@
+* {
+    background: #010001FF;
+    foreground: #e1c5e1FF;
+    selected-normal-background: #A02B93;
+    selected-normal-foreground: @foreground;
+    border-color: @background;
+}

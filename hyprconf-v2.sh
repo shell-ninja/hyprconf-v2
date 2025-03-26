@@ -176,10 +176,10 @@ sleep 1
 if hostnamectl | grep -q 'Chassis: vm'; then
     msg att "You are using this script in a Virtual Machine..."
     msg act "Setting up things for you..." 
-    sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
-    sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
-    rm "$dir/config/hypr/confs/monitor.conf"
-    mv "$dir/config/hypr/confs/monitor-vbox.conf" "$dir/config/hypr/confs/monitor.conf"
+    sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/confs/env.conf"
+    sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' "$dir/config/hypr/confs/env.conf"
+    mv "$dir/config/hypr/confs/monitor.conf" "$dir/config/hypr/confs/monitor-back.conf"
+    cp "$dir/config/hypr/confs/monitor-vbox.conf" "$dir/config/hypr/confs/monitor.conf"
 fi
 
 
@@ -251,12 +251,12 @@ parallel --bar "tar xzf {} -C ~/.themes/ --strip-components=1" ::: $assetsDir/th
 
 # vs code
 if [[ -d "$HOME/.config/Code" ]]; then 
-    mv "$HOME/.config/Code" "$HOME/.config/Code-Back"
+    mv "$HOME/.config/Code" "$HOME/.config/Code-Back-$(date +%d-%m-%Y_%I-%M-%p)"
 fi
 cp -r "$assetsDir/Code" "$HOME/.config/"
 
 if [[ -d "$HOME/.vscode/" ]]; then 
-    mv "$HOME/.vscode" "$HOME/.vscode-back"
+    mv "$HOME/.vscode" "$HOME/.vscode-back-$(date +%d-%m-%Y_%I-%M-%p)"
 fi
 cp -r "$assetsDir/.vscode" "$HOME/"
 

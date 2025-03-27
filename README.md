@@ -12,15 +12,15 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 <!-- <a href="#last"><kbd> <br> Last Modified <br> </kbd></a>&ensp;&ensp; -->
 <!-- <a href="https://github.com/shell-ninja/hyprconf/wiki"><kbd> <br> Wiki <br> </kbd></a> -->
 
-<div align="center">
-
-<br>
-<a href="#setup"><kbd> <br> Setup <br> </kbd></a>&ensp;&ensp;
-<a href="#config"><kbd> <br> Configuration <br> </kbd></a>&ensp;&ensp;
-<a href="#keyboards"><kbd> <br> keyboard Shortcuts <br> </kbd></a>&ensp;&ensp;
-<a href="#contrib"><kbd> <br> Contrubution <br> </kbd></a>&ensp;&ensp;
-
-</div>
+<!-- <div align="center"> -->
+<!---->
+<!-- <br> -->
+<!-- <a href="#setup"><kbd> <br> Setup <br> </kbd></a>&ensp;&ensp; -->
+<!-- <a href="#config"><kbd> <br> Configuration <br> </kbd></a>&ensp;&ensp; -->
+<!-- <a href="#keyboards"><kbd> <br> keyboard Shortcuts <br> </kbd></a>&ensp;&ensp; -->
+<!-- <a href="#contrib"><kbd> <br> Contrubution <br> </kbd></a>&ensp;&ensp; -->
+<!---->
+<!-- </div> -->
 
 > [!CAUTION]
 > Currently, taking screenshot of an area is creating a little problem. It suspends the script and I have no idea why it is happening. As soon as I fix it, I'll update it here. For now, only full screen screenshot is available.

@@ -14,11 +14,11 @@ configuration {
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";
-    location:                    center;
+    location:                    south;
     anchor:                      center;
     fullscreen:                  false;
     width:                       100%;
-    height:                      63%;
+    height:                      55%;
     x-offset:                    0px;
     y-offset:                    0px;
     enabled:                     true;
@@ -31,9 +31,9 @@ window {
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
-    spacing:                     80px;
+    spacing:                     20px;
     margin:                      0px;
-    padding:                     30px;
+    padding:                     10px;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
 }
@@ -49,15 +49,23 @@ inputbar {
     children:                    [ "prompt", "entry" ];
 }
 
+prompt {
+    enabled:                     false;
+    padding:                     15px;
+    border-radius:               15px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
 entry {
     enabled:                     true;
     expand:                      false;
     width:                       350px;
     padding:                     15px 20px;
     border-radius:               15px;
+    placeholder:                 " Select Theme";
     text-color:                  @foreground;
     cursor:                      text;
-    placeholder:                 " Select Wallpaper";
     placeholder-color:           inherit;
 }
 
@@ -73,7 +81,7 @@ listview {
     reverse:                     false;
     fixed-height:                false;
     fixed-columns:               true;
-    spacing:                     50px;
+    spacing:                     20px;
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
@@ -87,7 +95,7 @@ listview {
 /* ---- Element ---- */
 element {
     enabled:                true;
-    padding:                5px;
+    padding:                0px;
     cursor:                 pointer;
 	orientation: 			vertical;
     background-color:       transparent;

@@ -7,11 +7,9 @@ themeFile="$HOME/.config/hypr/.cache/.theme"
 
 # Retrieve image files
 PICS=($(ls "${assetsDir}" | grep -E ".jpg$|.jpeg$|.png$|.gif$"))
-# RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
-# RANDOM_PIC_NAME="${#PICS[@]}. random"
 
 # Rofi command ( style )
-rofi_command2="rofi -show -dmenu -config ~/.config/rofi/themes/rofi-wall-2.rasi"
+rofi_command2="rofi -show -dmenu -config ~/.config/rofi/themes/rofi-theme-select.rasi"
 
 menu() {
   for i in "${!PICS[@]}"; do
@@ -22,8 +20,6 @@ menu() {
       printf "${PICS[$i]}\n"
     fi
   done
-
-  # printf "$RANDOM_PIC_NAME\n"
 }
 
 theme=$(menu | ${rofi_command2})
@@ -134,17 +130,13 @@ settingsFile="$HOME/.config/Code/User/settings.json"
 
 # Ensure the settings file exists
 if [[ ! -f "$settingsFile" ]]; then
-    echo "Error: VS Code settings file not found at $settingsFile"
+    echo "[ ERROR ] VS Code settings file not found at $settingsFile"
     exit 1
 fi
 
 # Update or add the color theme setting in settings.json
 sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"$vscodeTheme\"|" "$settingsFile"
 
-echo "VS Code theme set to: $vscodeTheme"
-
 "$scrDir/waybar-reload.sh" --reload
 sleep 0.5
 hyprctl reload
-
-echo "Script ends here...."

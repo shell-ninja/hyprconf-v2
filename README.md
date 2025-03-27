@@ -13,12 +13,9 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 
 <a href="#screenshots"><kbd> <br> Screenshots <br> </kbd></a>&ensp;&ensp;
 <a href="#setup"><kbd> <br> Setup <br> </kbd></a>&ensp;&ensp;
-<a href="#update"><kbd> <br> Update <br> </kbd></a>&ensp;&ensp;
 <a href="#config"><kbd> <br> Configuration <br> </kbd></a>&ensp;&ensp;
 <a href="#keyboards"><kbd> <br> keyboard Shortcuts <br> </kbd></a>&ensp;&ensp;
-<a href="#last"><kbd> <br> Last Modified <br> </kbd></a>&ensp;&ensp;
 <a href="#contrib"><kbd> <br> Contrubution <br> </kbd></a>&ensp;&ensp;
-<a href="https://github.com/shell-ninja/hyprconf/wiki"><kbd> <br> Wiki <br> </kbd></a>
 
 </div>
 

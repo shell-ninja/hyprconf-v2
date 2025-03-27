@@ -92,6 +92,35 @@ msg() {
     esac
 }
 
+# Need to install 2 packages (gum and parallel)________________________
+installable_pkgs=(
+    gum
+    parallel
+)
+
+install() {
+    local pkg=${1}
+
+    if command -v pacman &> /dev/null; then
+        sudo pacman -S --noconfirm $1
+    elif command -v dnf &> /dev/null; then
+        sudo dnf install $1 -y
+    elif command -v zypper &> /dev/null; then
+        sudo zypper in $1 -y
+    fi
+}
+
+for pkg in "${installable_pkgs[@]}"; do
+    if sudo pacman -Q "$pkg" &> /dev/null || rpm -q "$pkg" &> /dev/null || sudo zypper se -i "$pkg" &> /dev/null; then
+        msg dn "Everything is fine. Proceeding to the next step"
+    else
+        msg att "Need to install $pkg. It's important."
+        install "$pkg" &> /dev/null
+    fi
+done
+
+sleep 2 && clear
+
 
 # Directories ----------------------------
 hypr_dir="$HOME/.config/hypr"

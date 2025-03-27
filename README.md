@@ -52,6 +52,13 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 </details>
 
 <details close>
+<summary>Theme Select</summary>
+<p align="center">
+   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf-v2/theme/6.png?raw=true" />
+</p> <br>
+</details>
+
+<details close>
 <summary>Menu</summary>
 <p align="center">
    <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf-v2/menu/1.png?raw=true" />

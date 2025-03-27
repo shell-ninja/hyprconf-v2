@@ -372,7 +372,5 @@ sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"Catppucci
 ln -sf "$HOME/.config/hypr/lockscreens/hyprlock-1.conf" "$HOME/.config/hypr/hyprlock.conf"
 
 msg dn "Script execution was successful! Now logout and log back in and enjoy your customization..." && sleep 1
-msg att "Logging out..." && sleep 2
-# hyprctl dispatch exit 1
 
 # === ___ Script Ends Here ___ === #

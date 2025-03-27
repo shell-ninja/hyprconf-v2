@@ -7,21 +7,6 @@
 
 This Hyprland configuration version is not for Dynamic Color Changing. It's a Theme based config, inspired by [HyDE](https://github.com/HyDE-Project/HyDE), but with 'easy to navigate' file structure.
 
-<div align="center">
-
-<br>
-
-<!-- <a href="#screenshots"><kbd> <br> Screenshots <br> </kbd></a>&ensp;&ensp; -->
-<a href="#setup"><kbd> <br> Setup <br> </kbd></a>&ensp;&ensp;
-<!-- <a href="#update"><kbd> <br> Update <br> </kbd></a>&ensp;&ensp; -->
-<a href="#config"><kbd> <br> Configuration <br> </kbd></a>&ensp;&ensp;
-<a href="#keyboards"><kbd> <br> keyboard Shortcuts <br> </kbd></a>&ensp;&ensp;
-<!-- <a href="#last"><kbd> <br> Last Modified <br> </kbd></a>&ensp;&ensp; -->
-<a href="#contrib"><kbd> <br> Contrubution <br> </kbd></a>&ensp;&ensp;
-<a href="https://github.com/shell-ninja/hyprconf/wiki"><kbd> <br> Wiki <br> </kbd></a>
-
-</div>
-
 > [!CAUTION]
 > Currently, taking screenshot of an area is creating a little problem. It suspends the script and I have no idea why it is happening. As soon as I fix it, I'll update it here. For now, only full screen screenshot is available.
 

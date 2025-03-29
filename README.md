@@ -19,9 +19,6 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 
 </div>
 
-> [!CAUTION]
-> Currently, taking screenshot of an area is creating a little problem. It suspends the script and I have no idea why it is happening. As soon as I fix it, I'll update it here. For now, only full screen screenshot is available.
-
 > [!NOTE]
 > This is a rolling release configuration. It means, I often make changes, fix bugs and add features. If you want to update to the latest changes, just use this keyboard shortcut to update: `SUPER Shift + U`
 

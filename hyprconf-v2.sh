@@ -125,7 +125,7 @@ sleep 2 && clear
 # Directories ----------------------------
 hypr_dir="$HOME/.config/hypr"
 scripts_dir="$hypr_dir/scripts"
-# fonts_dir="$HOME/.local/share/fonts"
+fonts_dir="$HOME/.local/share/fonts"
 
 msg act "Now setting up the pre installed Hyprland configuration..."sleep 1
 
@@ -247,15 +247,15 @@ else
     msg err "Could not find necessary scripts.."
 fi
 
-# Install Fonts
-# msg act "Installing some fonts..."
-# if [[ ! -d "$fonts_dir" ]]; then
-# 	mkdir -p "$fonts_dir"
-# fi
-#
-# cp -r "$dir/extras/fonts" "$fonts_dir"
-# msg act "Updating font cache..."
-# sudo fc-cache -fv 2>&1 | tee -a "$log" &> /dev/null
+Install Fonts
+msg act "Installing some fonts..."
+if [[ ! -d "$fonts_dir" ]]; then
+	mkdir -p "$fonts_dir"
+fi
+
+cp -r "$dir/extras/fonts" "$fonts_dir"
+msg act "Updating font cache..."
+sudo fc-cache -fv 2>&1 | tee -a "$log" &> /dev/null
 
 
 wayland_session_dir=/usr/share/wayland-sessions

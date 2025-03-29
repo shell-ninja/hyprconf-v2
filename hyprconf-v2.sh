@@ -247,7 +247,7 @@ else
     msg err "Could not find necessary scripts.."
 fi
 
-Install Fonts
+# Install Fonts
 msg act "Installing some fonts..."
 if [[ ! -d "$fonts_dir" ]]; then
 	mkdir -p "$fonts_dir"
@@ -335,7 +335,7 @@ update_dunst_colors
 
 # Setting VS Code extension based on theme selection
 settingsFile="$HOME/.config/Code/User/settings.json"
-sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"Catppuccin Mocha\"|" "$settingsFile"
+[[ -d "$settingsFile" ]] && sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"Catppuccin Mocha\"|" "$settingsFile"
 
 "$HOME/.config/hypr/scripts/wallcache.sh" &> /dev/null
 

@@ -269,38 +269,11 @@ fi
 
 
 ############################################################
-# themes and icons
-###########################################################
-assetsDir="$dir/assets"
-mkdir -p ~/.icons
-mkdir -p ~/.themes
-
-parallel --bar "tar xzf {} -C ~/.icons/ --strip-components=1" ::: $assetsDir/icons/*.tar.gz
-parallel --bar "tar xzf {} -C ~/.themes/ --strip-components=1" ::: $assetsDir/themes/*.tar.gz
-
-# vs code
-if [[ -d "$HOME/.config/Code" ]]; then 
-    mv "$HOME/.config/Code" "$HOME/.config/Code-Back-$(date +%d-%m-%Y_%I-%M-%p)"
-fi
-cp -r "$assetsDir/Code" "$HOME/.config/"
-
-if [[ -d "$HOME/.vscode/" ]]; then 
-    mv "$HOME/.vscode" "$HOME/.vscode-back-$(date +%d-%m-%Y_%I-%M-%p)"
-fi
-cp -r "$assetsDir/.vscode" "$HOME/"
-
-
-
-############################################################
 # setting theme
 ###########################################################
 # setting up the waybar
 ln -sf "$HOME/.config/waybar/configs/full-top" "$HOME/.config/waybar/config"
 ln -sf "$HOME/.config/waybar/style/full-top.css" "$HOME/.config/waybar/style.css"
-
-# setting up hyprlock theme
-# ln -sf "$HOME/.config/hypr/lockscreens/hyprlock-1.conf" "$HOME/.config/hypr/hyprlock.conf"
-
 
 themeFile="$HOME/.config/hypr/.cache/.theme"
 touch "$themeFile" && echo "Catppuccin" > "$themeFile"
@@ -371,6 +344,6 @@ sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"Catppucci
 #############################################
 ln -sf "$HOME/.config/hypr/lockscreens/hyprlock-1.conf" "$HOME/.config/hypr/hyprlock.conf"
 
-msg dn "Script execution was successful! Now logout and log back in and enjoy your customization..." && sleep 1
+msg dn "Script execution was successful! Now logout and log back in and enjoy your hyprland..." && sleep 1
 
 # === ___ Script Ends Here ___ === #

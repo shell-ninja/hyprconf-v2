@@ -72,7 +72,7 @@ BACKUP_DIR="$HOME/.config/hyprconf-v2-$(date +%d-%m-%Y)"
 msg nt "Uninstallation means, it will remove the dotfiles directories."
 msg nt "Your sddm login manager will be untouched."
 msg att "It will not remove the packages. Removing packages can cause system crash. You should remove them manually."
-msg att "To see the packages installed in this config, you can visit github: ${cyan}hyprconf-v2 > wiki > Uninstall page${end}"
+msg att "To see the packages installed in this config, you can visit github: ${cyan}hyprconf > wiki > Uninstall page${end}"
 
 echo
 

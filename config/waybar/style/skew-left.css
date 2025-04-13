@@ -62,6 +62,7 @@ tooltip label {
 #custom-power_btn,
 #idle_inhibitor,
 #custom-nightlight,
+#custom-notify,
 #clock,
 #pulseaudio,
 #network,
@@ -196,6 +197,15 @@ tooltip label {
   padding: 15px 0;
   padding-bottom: 5px;
   font-size: 12px;
+}
+
+#custom-notify {
+  color: @peach;
+  border-radius: 0;
+  padding: 15px 0;
+  padding-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 #clock {

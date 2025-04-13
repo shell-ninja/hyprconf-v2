@@ -73,11 +73,16 @@ tooltip label {
 #workspaces,
 #battery,
 #mpris,
+#custom-notify,
 #custom-nightlight,
 #backlight {
   background: transparent;
   opacity: 1;
   padding: 10px 5px;
+}
+
+#custom-notify {
+  color: @peach;
 }
 
 #idle_inhibitor {

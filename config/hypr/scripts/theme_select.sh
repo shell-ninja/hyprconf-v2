@@ -48,7 +48,6 @@ fi
 echo "$theme" > "$themeFile"
 
 "$scrDir/Wallpaper.sh" &> /dev/null
-"$scrDir/Refresh.sh" &> /dev/null
 
 # hyprland themes
 hyprTheme="$HOME/.config/hypr/confs/themes/${theme}.conf"
@@ -103,12 +102,8 @@ settingsFile="$HOME/.config/Code/User/settings.json"
 # Ensure the settings file exists
 if [[ ! -f "$settingsFile" ]]; then
     echo "[ ERROR ] VS Code settings file not found at $settingsFile"
-    exit 1
+else
+    sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"$vscodeTheme\"|" "$settingsFile"
 fi
 
-# Update or add the color theme setting in settings.json
-sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"$vscodeTheme\"|" "$settingsFile"
-
-"$scrDir/waybar-reload.sh" --reload
-sleep 0.5
-hyprctl reload
+"$scrDir/Refresh.sh" &> /dev/null

@@ -2,9 +2,9 @@
 
 # Kill already running processes
 _ps=(
-    dunst
+    swaync
     rofi
-    # waybar
+    waybar
 )
 for _prs in "${_ps[@]}"; do
     if pidof "${_prs}" &> /dev/null; then
@@ -13,7 +13,10 @@ for _prs in "${_ps[@]}"; do
 done
 
 sleep 0.3
-# waybar &
+swaync &
+waybar &
+
+sleep 1
 hyprctl reload
 
 exit 0

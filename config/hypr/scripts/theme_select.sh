@@ -48,7 +48,6 @@ fi
 echo "$theme" > "$themeFile"
 
 "$scrDir/Wallpaper.sh" &> /dev/null
-"$scrDir/Refresh.sh" &> /dev/null
 
 # hyprland themes
 hyprTheme="$HOME/.config/hypr/confs/themes/${theme}.conf"
@@ -69,38 +68,10 @@ kill -SIGUSR1 $(pidof kitty)
 waybarTheme="$HOME/.config/waybar/colors/${theme}.css"
 ln -sf "$waybarTheme" "$HOME/.config/waybar/style/theme.css"
 
+# set swaync colors
+swayncTheme="$HOME/.config/swaync/colors/${theme}.css"
+ln -sf "$swayncTheme" "$HOME/.config/swaync/colors.css"
 
-# ----- Dunst
-dunst_file="$HOME/.config/dunst/dunstrc"
-colors_file="$HOME/.config/kitty/colors/${theme}.conf"
-
-# Function to extract colors from Kitty .conf file
-extract_color() {
-    grep -E "^$1" "$colors_file" | awk '{print $NF}'
-}
-
-# Extract colors
-frame=$(extract_color "foreground")
-normal_bg=$(extract_color "background")
-normal_fg=$(extract_color "foreground")
-
-# Define missing colors (assuming low urgency should match normal)
-low_bg="$normal_bg"
-low_fg="$normal_fg"
-
-
-# Function to update Dunst colors
-update_dunst_colors() {
-    # Update Dunst configuration
-    sed -i "s/frame_color = .*/frame_color = \"$frame\"/g" "$dunst_file"
-    sed -i "/^\[urgency_low\]/,/^\[/ s/^    background = .*/    background = \"$low_bg\"/g" "$dunst_file"
-    sed -i "/^\[urgency_low\]/,/^\[/ s/^    foreground = .*/    foreground = \"$low_fg\"/g" "$dunst_file"
-    sed -i "/^\[urgency_normal\]/,/^\[/ s/^    background = .*/    background = \"${normal_bg}80\"/g" "$dunst_file"
-    sed -i "/^\[urgency_normal\]/,/^\[/ s/^    foreground = .*/    foreground = \"$normal_fg\"/g" "$dunst_file"
-    sed -i "/^\[urgency_critical\]/,/^\[/ s/^    foreground = .*/    foreground = \"$normal_fg\"/g" "$dunst_file"
-}
-
-update_dunst_colors
 
 # Setting VS Code extension based on theme selection
 case "$theme" in
@@ -131,12 +102,8 @@ settingsFile="$HOME/.config/Code/User/settings.json"
 # Ensure the settings file exists
 if [[ ! -f "$settingsFile" ]]; then
     echo "[ ERROR ] VS Code settings file not found at $settingsFile"
-    exit 1
+else
+    sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"$vscodeTheme\"|" "$settingsFile"
 fi
 
-# Update or add the color theme setting in settings.json
-sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"$vscodeTheme\"|" "$settingsFile"
-
-"$scrDir/waybar-reload.sh" --reload
-sleep 0.5
-hyprctl reload
+"$scrDir/Refresh.sh" &> /dev/null

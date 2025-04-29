@@ -5,8 +5,8 @@ return {
     event = { "BufReadPre", "BufNewFile" }, -- optional: lazy load on file open
     config = function()
         require("nvim-highlight-colors").setup({
-            -- render = "foreground", -- to highlight only text
-            render = "background",      -- to highlight text background
+            render = "foreground",      -- to highlight only text
+            -- render = "background",      -- to highlight text background
             enable_named_colors = true, -- Enable color names like 'red'
             enable_tailwind = true,     -- Enable Tailwind CSS colors
         })

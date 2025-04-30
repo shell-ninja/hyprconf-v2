@@ -11,36 +11,32 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
-    "height": 20,
-    "margin-top": 5,
-    "margin-left": 5,
-    "margin-right": 5,
+    "height": 15,
+    "margin-top": 0,
 
     "modules-left": [
-        "custom/launch_rofi", 
-        "tray", 
-        "hyprland/workspaces#preview", 
+        "custom/launch_rofi",
+        "idle_inhibitor", 
+        "custom/nightlight", 
+        "custom/clipboard", 
         "custom/weather",
-        "mpris" 
+        "mpris",
+        "custom/cava"
     ],
 
     "modules-center": [
         "power-profiles-daemon",
-        "clock",
-        "custom/notify"
+        "hyprland/workspaces#preview",
+        "custom/updater"
     ],
 
     "modules-right": [
-        "custom/updater", 
-        "pulseaudio", 
-        "pulseaudio#microphone", 
-        "group/sysinfo", 
-        "idle_inhibitor", 
-        "custom/nightlight", 
-        "custom/clipboard", 
-        "battery", 
-        "backlight",  
-        "group/network", 
+        "tray",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "network",
+        "custom/notify",
+        "clock",
         "custom/power_btn"
     ],
 }

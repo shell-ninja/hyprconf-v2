@@ -35,7 +35,7 @@ apply_config() {
     ln -sf "$layout_file" "$waybar_config"
     ln -sf "$style_file" "$waybar_style"
 
-    if [[ "$1" == "fancy-top" || "$1" == "full-top" ]]; then
+    if [[ "$1" == "fancy-top" || "$1" == "full-top" || "rounded-top" ]]; then
         echo
         echo "Enabling blur in $env"
         sed -i "/^#blurls = waybar$/ s/#//" "$env"
@@ -46,7 +46,7 @@ apply_config() {
         sed -i "/^blurls = waybar$/ s/^/#/" "$env"
     fi
 
-    if [[ "$1" == *"-top"* && ! "$1" == "dual-tone-top" && ! "$1" == "reflection-top" ]]; then
+    if [[ "$1" == *"-top"* && ! "$1" == "dual-tone-top" && ! "$1" == "reflection-top" && ! "$1" == "rounded-top" ]]; then
         sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
         sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
@@ -56,7 +56,7 @@ apply_config() {
         sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_clipboard"
         sed -i "s/x-offset:.*/x-offset: -15px;/g" "$rofi_clipboard"
 
-    elif [[ "$1" == *"dual-tone-top"* ]]; then
+    elif [[ "$1" == *"dual-tone-top"* || "$1" == *"rounded-top"* ]]; then
         sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
         sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"

@@ -148,6 +148,7 @@ dirs=(
     rofi
     swaync
     waybar
+    xfce4
     xsettingsd
     yazi
 )

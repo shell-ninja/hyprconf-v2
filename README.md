@@ -94,7 +94,8 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 <details close>
 <summary>Login Screen (sddm)</summary>
 <p align="center">
-   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/sddm/sddm_theme.jpg?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/sddm/sddm1.jpg?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/sddm/sddm2.jpg?raw=true" />
 </p>
 </details>
 

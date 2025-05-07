@@ -112,7 +112,7 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 
 ## <img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=90EE90&vCenter=true&width=435&height=25&lines=FEATURES" width="450"/>
 
-- Similar to my [hyprconf](https://github.com/shell-ninja/hyprconf) setup, but it's not has the dynamic color changing feature. I has colors palets based on some popular themes
+- Similar to my [hyprconf](https://github.com/shell-ninja/hyprconf) setup, but it has colors palets based on some popular themes, doesn't change colors while changing a wallpaper.
 
 <br>
 

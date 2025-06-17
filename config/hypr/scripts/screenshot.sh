@@ -4,7 +4,7 @@ if [ -z "$XDG_PICTURES_DIR" ] ; then
     XDG_PICTURES_DIR="$HOME/Pictures"
 fi
 
-sound_file="/usr/share/sounds/freedesktop/stereo/screen-capture.oga"
+sound_file="$HOME/.config/hypr/sounds/screen-capture.oga"
 swpy_dir="$HOME/.config/swappy"
 save_dir="${2:-$XDG_PICTURES_DIR/Screenshots}"
 save_file=$(date +'screenshot_%y%m%d_%H%M%S.png')

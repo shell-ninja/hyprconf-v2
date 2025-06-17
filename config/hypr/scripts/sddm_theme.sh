@@ -4,11 +4,26 @@
 THEME_CONF="/usr/share/sddm/themes/SilentSDDM/configs/default-left.conf"
 
 # Wallpaper settings
-wallDir="$HOME/.config/hypr/Wallpaper"
-currentWall=$(cat "$HOME/.config/hypr/.cache/.wallpaper")
+if [[ -f "$HOME/.config/hypr/.cache/.theme" ]]; then
+    theme=$(cat "$HOME/.config/hypr/.cache/.theme")
+    wallDir="$HOME/.config/hypr/Wallpapers/${theme}"
 
-# Match supported image extensions
-wallPath=$(find "$wallDir" -maxdepth 1 -type f -iname "${currentWall}.*" | head -n 1)
+    # Extract colors from pywal
+    themeCss="$HOME/.config/waybar/colors/${theme}.css"
+    FG=$(grep '@define-color foreground' "$themeCss" | cut -d ' ' -f3 | tr -d ';')
+    BG=$(grep '@define-color background' "$themeCss" | cut -d ' ' -f3 | tr -d ';')
+else
+    wallDir="$HOME/.config/hypr/Wallpaper"
+
+    # Extract colors from pywal
+    FG=$(jq -r '.special.foreground' < ~/.cache/wal/colors.json)
+    BG=$(jq -r '.special.background' < ~/.cache/wal/colors.json)
+fi
+
+currentWall=$(cat "$HOME/.config/hypr/.cache/.wallpaper")
+wall="${wallDir}/${currentWall}.*"
+
+wallPath=$(ls $wall 2>/dev/null | head -n 1)
 wallName=$(basename "$wallPath")
 
 if [[ -z "$wallPath" || ! -f "$wallPath" ]]; then
@@ -17,10 +32,6 @@ if [[ -z "$wallPath" || ! -f "$wallPath" ]]; then
     exit 1
 fi
 
-
-# Extract colors from pywal
-FG=$(jq -r '.special.foreground' < ~/.cache/wal/colors.json)
-BG=$(jq -r '.special.background' < ~/.cache/wal/colors.json)
 
 # Backup your theme.conf
 sudo cp "$THEME_CONF" "${THEME_CONF}.bak"

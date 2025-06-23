@@ -29,24 +29,19 @@ apply_config() {
     layout_file="$waybar_layouts/$1"
     style_file="$waybar_styles/$1.css"
 
-    # echo "Linking $layout_file to $waybar_config"
-    # echo "Linking $style_file to $waybar_style"
-
     ln -sf "$layout_file" "$waybar_config"
     ln -sf "$style_file" "$waybar_style"
 
-    if [[ "$1" == "fancy-top" || "$1" == "full-top" || "rounded-top" ]]; then
-        echo
+    if [[ "$1" == "full-top" || "$1" == "rounded-top" ]]; then
         echo "Enabling blur in $env"
         sed -i "/^#blurls = waybar$/ s/#//" "$env"
         sed -i "/^#blurls = waybar$/d" "$env"
     else
-        echo
         echo "Disabling blur in $env"
         sed -i "/^blurls = waybar$/ s/^/#/" "$env"
     fi
 
-    if [[ "$1" == *"-top"* && ! "$1" == "dual-tone-top" && ! "$1" == "reflection-top" && ! "$1" == "rounded-top" ]]; then
+    if [[ "$1" == *"-top"* && ! "$1" == "dual-tone-top" && ! "$1" == "rounded-top" ]]; then
         sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
         sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
@@ -66,13 +61,15 @@ apply_config() {
         sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_clipboard"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_clipboard"
 
-    elif [[ "$1" == *"reflection-top"* ]]; then
-        sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
+    elif [[ "$1" == *"-bottom"* ]]; then
+        sed -i "s/location:.*/location: southWest;/g" "$rofi_menu"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
-        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
+        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_menu"
 
-        sed -i "s/location:.*/location: north;/g" "$rofi_clipboard"
-        sed -i "s/anchor:.*/anchor: center;/g" "$rofi_clipboard"
+        sed -i "s/location:.*/location: southeast;/g" "$rofi_clipboard"
+        sed -i "s/anchor:.*/anchor: southeast;/g" "$rofi_clipboard"
+        sed -i "s/x-offset:.*/x-offset: -15px;/g" "$rofi_clipboard"
+        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_clipboard"
 
     elif [[ "$1" == *"-left"* ]]; then
         sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
@@ -104,11 +101,7 @@ main() {
         exit 0
     fi
 
-    case $choice in
-        *)
-            apply_config "$choice"
-            ;;
-    esac
+    apply_config "$choice"
 }
 
 if pgrep -x "rofi" &> /dev/null; then

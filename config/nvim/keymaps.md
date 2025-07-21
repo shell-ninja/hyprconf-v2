@@ -3,7 +3,7 @@
 | i       | jk         | Exit insert mode                                  |
 | n       | <leader>cl | Clear search highlights                           |
 | i, n    | <C-x>      | Save and exit                                     |
-| i       | js         | Save and exit                                     |
+| i       | jf         | Save and exit                                     |
 | i, n    | <C-s>      | Save                                              |
 | i, n    | <C-z>      | Undo                                              |
 | n       | u          | Undo                                              |

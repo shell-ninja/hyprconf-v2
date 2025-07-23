@@ -2,6 +2,7 @@
 
 # Kill already running processes
 _ps=(
+    dunst
     swaync
     rofi
     waybar
@@ -12,7 +13,8 @@ for _prs in "${_ps[@]}"; do
     fi
 done
 
-sleep 0.3
+sleep 0.1
+dunst &
 swaync &
 waybar &
 

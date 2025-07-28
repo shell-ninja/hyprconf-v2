@@ -110,24 +110,33 @@ update_dunst_colors() {
 case "$theme" in
     Catppuccin)
         vscodeTheme="Catppuccin Mocha"
+        kvTheme="Catppuccin"
         ;;
     Everforest)
         vscodeTheme="Everforest Dark"
+        kvTheme="Everforest"
         ;;
     Gruvbox)
         vscodeTheme="Gruvbox Dark Soft"
+        kvTheme="Gruvbox"
         ;;
     Neon)
         vscodeTheme="Neon Dark Theme"
+        kvTheme="Nordic-Darker"
         ;;
     TokyoNight)
         vscodeTheme="Tokyo Storm Gogh"
+        kvTheme="TokyoNight"
         ;;
     *)
         echo "Warning: Unknown theme selected. No changes applied."
         exit 1
         ;;
 esac
+
+# set qt theme
+crudini --set "$HOME/.config/Kvantum/kvantum.kvconfig" General theme "${kvTheme}"
+
 
 # Modify VS Code settings.json
 settingsFile="$HOME/.config/Code/User/settings.json"

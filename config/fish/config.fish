@@ -19,9 +19,9 @@ end
 #===============================================#
 #           aliases and functions
 #===============================================#
-source ~/.config/fish/aliases.fish
-source ~/.config/fish/functions.fish
-
+source ~/.config/fish/conf.d/aliases.fish
+source ~/.config/fish/functions/functions.fish
+source ~/.config/fish/conf.d/personal.fish
 
 #===============================================#
 #           zoxide and thefuck
@@ -34,7 +34,7 @@ if command -v fastfetch > /dev/null
     # Only run fastfetch if we're in an interactive shell
     if status --is-interactive
         if test -d "$HOME/.local/share/fastfetch"
-            set ffconfig minimal
+            set ffconfig ascii-art
             fastfetch --config "$ffconfig"
         else
             fastfetch

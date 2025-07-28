@@ -321,6 +321,9 @@ ln -sf "$swayncTheme" "$HOME/.config/swaync/colors.css"
 settingsFile="$HOME/.config/Code/User/settings.json"
 [[ -d "$settingsFile" ]] && sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"Catppuccin Mocha\"|" "$settingsFile"
 
+# setting qt theme
+crudini --set "$HOME/.config/Kvantum/kvantum.kvconfig" General theme "Catppuccin"
+
 "$HOME/.config/hypr/scripts/wallcache.sh" &> /dev/null
 "$HOME/.config/config/hypr/scripts/Refresh.sh" &> /dev/null
 

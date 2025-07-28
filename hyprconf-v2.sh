@@ -323,6 +323,7 @@ settingsFile="$HOME/.config/Code/User/settings.json"
 
 # setting qt theme
 crudini --set "$HOME/.config/Kvantum/kvantum.kvconfig" General theme "Catppuccin"
+crudini --set ~/.config/kdeglobals Icons Theme "Tela-circle-dracula"
 
 "$HOME/.config/hypr/scripts/wallcache.sh" &> /dev/null
 "$HOME/.config/config/hypr/scripts/Refresh.sh" &> /dev/null

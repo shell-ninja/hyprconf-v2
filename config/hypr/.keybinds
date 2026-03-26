@@ -6,7 +6,7 @@
  + W | change wallpaper (Wallpaper.sh)
  + T | change theme
  + SHIFT + W | select wallpaper (WallpaperSelect.sh)
- + ALT + E | switch wallpaper engine (swww/hyprpaper)
+ + ALT + E | switch wallpaper engine (awww/hyprpaper)
  + E | open file manager (Dolphin)
  + SHIFT + E | open terminal file manager (Yazi)
  + V | toggle floating window

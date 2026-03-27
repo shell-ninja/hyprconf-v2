@@ -13,7 +13,7 @@ FPS=60
 TYPE="random"
 DURATION=1
 BEZIER=".43,1.19,1,.4"
-SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
+AWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
 
 
 # Retrieve image files
@@ -47,7 +47,7 @@ case $1 in
         ;;
 esac
 
-swww-daemon &
+awww-daemon &
 
 # No choice case
 if [[ -z $choice ]]; then
@@ -56,7 +56,7 @@ fi
 
 # Random choice case
 if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
-  swww img "${wallDIR}/${RANDOM_PIC}" $SWWW_PARAMS
+  awww img "${wallDIR}/${RANDOM_PIC}" $AWWW_PARAMS
   exit 0
 fi
 
@@ -72,7 +72,7 @@ done
 
 if [[ $pic_index -ne -1 ]]; then
     notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper" -t 1500
-    swww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
+    awww img "${wallDIR}/${PICS[$pic_index]}" $AWWW_PARAMS
 
     ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
     basename="$(basename "${wallDIR}/${PICS[$pic_index]}")"

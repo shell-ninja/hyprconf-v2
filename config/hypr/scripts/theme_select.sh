@@ -10,16 +10,16 @@ shopt -s nullglob nocaseglob
 PICS=("${assetsDir}"/*.{jpg,jpeg,png,gif})
 shopt -u nullglob nocaseglob
 
-# Strip to basenames
-PICS=("${PICS[@]##*/}")
-
 # Exit early if no images found
 if [[ ${#PICS[@]} -eq 0 ]]; then
     echo "No images found in ${assetsDir}"
     exit 1
 fi
 
-# Rofi command (array avoids word-splitting pitfalls)
+# Strip to basenames
+PICS=("${PICS[@]##*/}")
+
+# Rofi command
 rofi_cmd=(rofi -show -dmenu -config ~/.config/rofi/themes/rofi-theme-select.rasi)
 
 menu() {
@@ -35,10 +35,8 @@ menu() {
 
 theme=$(menu | "${rofi_cmd[@]}")
 
-# No choice case
-if [[ -z "$theme" ]]; then
-    exit 0
-fi
+# Exit if no theme was selected
+[[ -z "$theme" ]] && exit 0
 
 # Find matching image
 pic_index=-1
@@ -56,46 +54,42 @@ else
     exit 1
 fi
 
+# Save selected theme
 echo "$theme" > "$themeFile"
 
+# Apply Wallpaper
 "$scrDir/Wallpaper.sh" &> /dev/null
 
-# hyprland themes
-hyprTheme="$HOME/.config/hypr/confs/themes/${theme}.conf"
-ln -sf "$hyprTheme" "$HOME/.config/hypr/confs/decoration.conf"
+# Function to safely symlink
+safe_link() {
+    local source_file="$1"
+    local target_link="$2"
+    if [[ -f "$source_file" ]]; then
+        mkdir -p "$(dirname "$target_link")"
+        ln -sf "$source_file" "$target_link"
+    fi
+}
 
-# rofi themes
-rofiTheme="$HOME/.config/rofi/colors/${theme}.rasi"
-ln -sf "$rofiTheme" "$HOME/.config/rofi/themes/rofi-colors.rasi"
+# Apply UI Themes
+safe_link "$HOME/.config/hypr/confs/themes/${theme}.conf" "$HOME/.config/hypr/confs/decoration.conf"
+safe_link "$HOME/.config/rofi/colors/${theme}.rasi" "$HOME/.config/rofi/themes/rofi-colors.rasi"
+safe_link "$HOME/.config/kitty/colors/${theme}.conf" "$HOME/.config/kitty/theme.conf"
+safe_link "$HOME/.config/waybar/colors/${theme}.css" "$HOME/.config/waybar/style/theme.css"
+safe_link "$HOME/.config/wlogout/colors/${theme}.css" "$HOME/.config/wlogout/colors.css"
 
-# Kitty themes
-kittyTheme="$HOME/.config/kitty/colors/${theme}.conf"
-ln -sf "$kittyTheme" "$HOME/.config/kitty/theme.conf"
+if command -v swaync &>/dev/null; then
+    safe_link "$HOME/.config/swaync/colors/${theme}.css" "$HOME/.config/swaync/colors.css"
+fi
 
-# Apply new colors dynamically (guard against kitty not running)
+# Apply new colors dynamically to Kitty
 if pids=$(pidof kitty 2>/dev/null) && [[ -n "$pids" ]]; then
     kill -SIGUSR1 $pids
 fi
 
-# waybar themes
-waybarTheme="$HOME/.config/waybar/colors/${theme}.css"
-ln -sf "$waybarTheme" "$HOME/.config/waybar/style/theme.css"
-
-# wlogout themes
-wlogoutTheme="$HOME/.config/wlogout/colors/${theme}.css"
-ln -sf "$wlogoutTheme" "$HOME/.config/wlogout/colors.css"
-
-# set swaync colors
-swayncTheme="$HOME/.config/swaync/colors/${theme}.css"
-command -v swaync &>/dev/null && ln -sf "$swayncTheme" "$HOME/.config/swaync/colors.css"
-
-# Extract a color value by exact key from kitty conf
-extract_color() {
-    awk -v key="$1" '$1 == key { print $NF; exit }' "$colors_file"
-}
-
-
 # Setting VS Code / Kvantum theme based on selection
+kvTheme=""
+vscodeTheme=""
+
 case "$theme" in
     Catppuccin)
         vscodeTheme="Catppuccin Mocha"
@@ -118,21 +112,22 @@ case "$theme" in
         kvTheme="TokyoNight"
         ;;
     *)
-        echo "Warning: Unknown theme selected. No changes applied."
-        exit 1
+        echo "Warning: Unknown theme '$theme'. Core WM themes applied, but skipping VS Code/Kvantum."
         ;;
 esac
 
-# set qt theme
-crudini --set "$HOME/.config/Kvantum/kvantum.kvconfig" General theme "${kvTheme}"
+# Apply Qt and VS Code themes only if mapped
+if [[ -n "$kvTheme" && -n "$vscodeTheme" ]]; then
+    crudini --set "$HOME/.config/Kvantum/kvantum.kvconfig" General theme "${kvTheme}"
 
-# Modify VS Code settings.json
-settingsFile="$HOME/.config/Code/User/settings.json"
-
-if [[ ! -f "$settingsFile" ]]; then
-    echo "[ ERROR ] VS Code settings file not found at $settingsFile"
-else
-    sed -i "s|\"workbench.colorTheme\": \".*\"|\"workbench.colorTheme\": \"$vscodeTheme\"|" "$settingsFile"
+    settingsFile="$HOME/.config/Code/User/settings.json"
+    if [[ ! -f "$settingsFile" ]]; then
+        echo "[ ERROR ] VS Code settings file not found at $settingsFile"
+    else
+        # Stricter regex to prevent messing up other JSON keys on the same line
+        sed -i -E 's/("workbench.colorTheme"[ \t]*:[ \t]*)"[^"]+"/\1"'"$vscodeTheme"'"/' "$settingsFile"
+    fi
 fi
 
+# Refresh the environment
 "$scrDir/Refresh.sh" &> /dev/null

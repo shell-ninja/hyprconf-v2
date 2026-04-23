@@ -185,7 +185,7 @@ sleep 1
 
 ####################################################################
 
-_____ if OpenBangla Keyboard is installed
+#_____ if OpenBangla Keyboard is installed
 keyboard_path="/usr/share/openbangla-keyboard"
 
 if [[ -d "$keyboard_path" ]]; then

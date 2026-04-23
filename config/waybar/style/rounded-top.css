@@ -318,17 +318,17 @@ tooltip label {
 }
 
 #power-profiles-daemon.performance {
-  color: #fab387;
+  color: #ff6b3d;
   font-size: 15px;
 }
 
 #power-profiles-daemon.balanced {
-  color: #a6e3a1;
+  color: #f5c542;
   font-size: 15px;
 }
 
 #power-profiles-daemon.power-saver {
-  color: #89dceb;
+  color: #4cd964;
   font-size: 15px;
 }
 

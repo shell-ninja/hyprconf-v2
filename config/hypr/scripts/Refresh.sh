@@ -1,24 +1,17 @@
 #!/bin/bash
+# Refresh.sh — Restart notification daemon and reload Hyprland.
 
-# Kill already running processes
-_ps=(
-    dunst
-    swaync
-    rofi
-    waybar
-)
+# Kill running daemons
+_ps=(swaync rofi waybar)
 for _prs in "${_ps[@]}"; do
-    if pidof "${_prs}" &> /dev/null; then
-        pkill "${_prs}"
-    fi
+    pidof "${_prs}" &>/dev/null && pkill -SIGTERM "${_prs}"
 done
 
-sleep 0.1
-dunst &
-swaync &
+sleep 0.4
 waybar &
+swaync &
 
-sleep 1
 hyprctl reload
 
 exit 0
+

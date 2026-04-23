@@ -10,9 +10,9 @@ TYPE="any"
 DURATION=2
 BEZIER=".43,1.19,1,.4"
 AWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
+awww-daemon &
 
 if [ -f "$wallpaper" ]; then
-    awww-daemon &
     awww img ${wallpaper} $AWWW_PARAMS
 else
     "$scrDir/Wallpaper.sh"

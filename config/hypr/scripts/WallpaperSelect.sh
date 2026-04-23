@@ -47,8 +47,6 @@ case $1 in
         ;;
 esac
 
-awww-daemon &
-
 # No choice case
 if [[ -z $choice ]]; then
   exit 0

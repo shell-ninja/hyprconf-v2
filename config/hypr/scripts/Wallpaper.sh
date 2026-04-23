@@ -21,7 +21,6 @@ BEZIER=".43,1.19,1,.4"
 AWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
 notify-send -i "${wallpaper}" "Changing wallpaper" -t 1500
-awww-daemon &
 awww img ${wallpaper} $AWWW_PARAMS
 
 ln -sf "$wallpaper" "$cacheDir/current_wallpaper.png"

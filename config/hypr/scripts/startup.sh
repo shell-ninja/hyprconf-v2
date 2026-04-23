@@ -18,6 +18,11 @@ else
     "$scrDir/Wallpaper.sh"
 fi
 
+# if openbangla keyboard is installed, the
+if [[ -d "/usr/share/openbangla-keyboard" ]]; then
+    fcitx5 &> /dev/null
+fi
+
 "$scrDir/notification.sh" sys
 "$scrDir/wallcache.sh"
 "$scrDir/system.sh" run &

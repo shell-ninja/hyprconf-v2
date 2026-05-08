@@ -1,0 +1,7 @@
+* {
+    background: #363537e6;
+    foreground: #f7f1ffff;
+    selected-normal-background: #fc618dff;
+    selected-normal-foreground: #363537ff;
+    border-color: @background;
+}

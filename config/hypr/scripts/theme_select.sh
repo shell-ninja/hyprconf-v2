@@ -111,6 +111,10 @@ case "$theme" in
         vscodeTheme="Tokyo Storm Gogh"
         kvTheme="TokyoNight"
         ;;
+    X)
+        vscodeTheme="X"
+        kvTheme="X"
+        ;;
     *)
         echo "Warning: Unknown theme '$theme'. Core WM themes applied, but skipping VS Code/Kvantum."
         ;;

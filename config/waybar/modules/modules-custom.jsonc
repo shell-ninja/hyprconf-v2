@@ -17,7 +17,7 @@
     "custom/power_btn": {
         "format": "",
         "tooltip": false,
-        "on-click": "wlogout -b 6 --layout ~/.config/wlogout/layout --css ~/.config/wlogout/style.css",
+        "on-click": "wlogout -b 6 --layout ~/.config/wlogout/layout --css ~/.config/wlogout/style.css"
     },
 
     "custom/notify": {
@@ -39,7 +39,7 @@
         "exec": "swaync-client -swb",
         "on-click": "sleep 0.1 && swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
-        "escape": true,
+        "escape": true
     },
 
 

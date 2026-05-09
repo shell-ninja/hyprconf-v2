@@ -15,6 +15,12 @@ DURATION=1
 BEZIER=".43,1.19,1,.4"
 AWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
 
+if command -v awww &> /dev/null; then
+    ENGINE=awww
+elif command -v swww &> /dev/null; then
+    ENGINE=swww
+fi
+
 
 # Retrieve image files
 PICS=($(ls "${wallDIR}" | grep -E ".jpg$|.jpeg$|.png$|.gif$"))
@@ -54,7 +60,7 @@ fi
 
 # Random choice case
 if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
-  awww img "${wallDIR}/${RANDOM_PIC}" $AWWW_PARAMS
+    ${ENGINE} img "${wallDIR}/${RANDOM_PIC}" $AWWW_PARAMS
   exit 0
 fi
 
@@ -70,7 +76,7 @@ done
 
 if [[ $pic_index -ne -1 ]]; then
     notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper" -t 1500
-    awww img "${wallDIR}/${PICS[$pic_index]}" $AWWW_PARAMS
+    ${ENGINE} img "${wallDIR}/${PICS[$pic_index]}" $AWWW_PARAMS
 
     ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
     basename="$(basename "${wallDIR}/${PICS[$pic_index]}")"

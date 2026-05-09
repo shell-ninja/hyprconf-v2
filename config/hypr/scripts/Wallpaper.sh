@@ -20,8 +20,14 @@ DURATION=1
 BEZIER=".43,1.19,1,.4"
 AWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
+if command -v awww &> /dev/null; then
+    ENGINE=awww
+elif command -v swww &> /dev/null; then
+    ENGINE=swww
+fi
+
 notify-send -i "${wallpaper}" "Changing wallpaper" -t 1500
-awww img ${wallpaper} $AWWW_PARAMS
+${ENGINE} img ${wallpaper} $AWWW_PARAMS
 
 ln -sf "$wallpaper" "$cacheDir/current_wallpaper.png"
 

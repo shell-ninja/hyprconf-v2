@@ -18,6 +18,7 @@ src_swaync_colors="${repo_root}/config/swaync/colors/${theme_name}.css"
 src_assets_dir="${repo_root}/config/hypr/assets"
 src_wallpapers_dir_upper="${repo_root}/config/hypr/Wallpapers/${theme_name}"
 src_wallpapers_dir_lower="${repo_root}/config/hypr/Wallpapers/${theme_name,,}"
+src_kvantum_dir="${repo_root}/config/Kvantum/${theme_name}"
 
 dst_hypr_theme="$HOME/.config/hypr/confs/themes/${theme_name}.conf"
 dst_kitty_colors="$HOME/.config/kitty/colors/${theme_name}.conf"
@@ -29,6 +30,8 @@ dst_swaync_colors="$HOME/.config/swaync/colors/${theme_name}.css"
 dst_assets_dir="$HOME/.config/hypr/assets"
 dst_wallpapers_dir="$HOME/.config/hypr/Wallpapers/${theme_name}"
 dst_theme_cache="$HOME/.config/hypr/.cache/.theme"
+dst_kvantum_dir="$HOME/.config/Kvantum/${theme_name}"
+dst_kvantum_config="$HOME/.config/Kvantum/kvantum.kvconfig"
 
 ensure_parent_dir() {
     local target="$1"
@@ -106,6 +109,21 @@ if [[ -d "$src_wallpapers_dir_upper" || -d "$src_wallpapers_dir_lower" ]]; then
     echo "[OK] Wallpapers synced to $dst_wallpapers_dir"
 else
     echo "[WARN] No wallpapers found for $theme_name in repo"
+fi
+
+if [[ -d "$src_kvantum_dir" ]]; then
+    mkdir -p "$dst_kvantum_dir"
+    cp -f "$src_kvantum_dir/${theme_name}.kvconfig" "$dst_kvantum_dir/${theme_name}.kvconfig"
+    cp -f "$src_kvantum_dir/${theme_name}.svg" "$dst_kvantum_dir/${theme_name}.svg"
+    echo "[OK] Kvantum theme synced to $dst_kvantum_dir"
+    mkdir -p "$(dirname -- "$dst_kvantum_config")"
+    cat > "$dst_kvantum_config" <<EOF
+[General]
+theme=${theme_name}
+EOF
+    echo "[OK] Kvantum config set to ${theme_name}"
+else
+    echo "[WARN] Kvantum theme directory not found: $src_kvantum_dir"
 fi
 
 mkdir -p "$(dirname -- "$dst_theme_cache")"

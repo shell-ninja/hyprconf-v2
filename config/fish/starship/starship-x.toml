@@ -1,0 +1,149 @@
+format = """
+[░▒▓](#2a2a2a)\
+$os\
+[](bg:#fc618d fg:#2a2a2a)\
+$directory\
+[](fg:#fc618d bg:#948ae3)\
+$git_branch\
+$git_status\
+[](fg:#948ae3 bg:#141414)\
+$nodejs\
+$rust\
+$golang\
+$php\
+$java\
+$julia\
+$ocaml\
+$zig\
+$lua\
+$python\
+$ruby\
+$dart\
+$c\
+[](fg:#141414 bg:#0b0b0b)\
+$time\
+[ ](fg:#0b0b0b)\
+\n$character"""
+
+[directory]
+style = "fg:#0b0b0b bg:#fc618d"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Videos" = " "
+
+[os]
+disabled = false
+style = "bg:#2a2a2a fg:#f7f1ff"
+
+[os.symbols]
+Windows = " 󰍲 "
+Ubuntu = " 󰕈 "
+SUSE = "  "
+Raspbian = " 󰐿 "
+Mint = " 󰣭 "
+Macos = " 󰀵 "
+Manjaro = "  "
+Linux = " 󰌽 "
+Gentoo = " 󰣨 "
+Fedora = " 󰣛 "
+Alpine = "  "
+Amazon = "  "
+Android = "  "
+Arch = " 󰣇 "
+Artix = " 󰣇 "
+CentOS = "  "
+Debian = " 󰣚 "
+Redhat = " 󱄛 "
+RedHatEnterprise = " 󱄛 "
+Pop = "  "
+
+[git_branch]
+symbol = ""
+style = "bg:#948ae3"
+format = "[[ $symbol $branch ](fg:#0b0b0b bg:#948ae3)]($style)"
+
+[git_status]
+style = "bg:#948ae3"
+format = "[[($all_status$ahead_behind )](fg:#0b0b0b bg:#948ae3)]($style)"
+
+[nodejs]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[rust]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[golang]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[php]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[java]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[julia]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[ocaml]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[zig]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[lua]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[python]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[ruby]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[dart]
+symbol = ""
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[c]
+symbol = "󰬊"
+style = "bg:#141414"
+format = "[[ $symbol ($version) ](fg:#5ad4e6 bg:#141414)]($style)"
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#0b0b0b"
+format = "[[  $time ](fg:#f7f1ff bg:#0b0b0b)]($style)"
+
+[character]
+success_symbol = "[❯](bold #7bd88f)"
+error_symbol = "[❯](bold #fc618d)"

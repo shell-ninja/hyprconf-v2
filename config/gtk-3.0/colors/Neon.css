@@ -1,0 +1,39 @@
+/* Neon Cyberpunk for GTK-4 / Libadwaita */
+@define-color accent_color #ce4ab7;
+@define-color accent_bg_color #ce4ab7;
+@define-color accent_fg_color #080010;
+
+@define-color window_bg_color #10051d;
+@define-color window_fg_color #f1e4ff;
+
+@define-color view_bg_color #10051d;
+@define-color view_fg_color #f1e4ff;
+
+@define-color headerbar_bg_color #080010;
+@define-color headerbar_fg_color #f1e4ff;
+@define-color headerbar_border_color rgba(241, 228, 255, 0.08);
+@define-color headerbar_backdrop_color #080010;
+
+@define-color card_bg_color #210b3b;
+@define-color card_fg_color #f1e4ff;
+@define-color card_border_color rgba(241, 228, 255, 0.08);
+
+@define-color popover_bg_color #080010;
+@define-color popover_fg_color #f1e4ff;
+
+@define-color dialog_bg_color #10051d;
+@define-color dialog_fg_color #f1e4ff;
+
+@define-color sidebar_bg_color #080010;
+@define-color sidebar_fg_color #f1e4ff;
+
+@define-color secondary_sidebar_bg_color #080010;
+@define-color secondary_sidebar_fg_color #f1e4ff;
+
+/* GTK3 compat */
+@define-color theme_bg_color #10051d;
+@define-color theme_fg_color #f1e4ff;
+@define-color theme_base_color #10051d;
+@define-color theme_text_color #f1e4ff;
+@define-color theme_selected_bg_color #ce4ab7;
+@define-color theme_selected_fg_color #080010;

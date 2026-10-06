@@ -77,9 +77,17 @@ safe_link "$HOME/.config/rofi/colors/${theme}.rasi" "$HOME/.config/rofi/themes/r
 safe_link "$HOME/.config/kitty/colors/${theme}.conf" "$HOME/.config/kitty/theme.conf"
 safe_link "$HOME/.config/waybar/colors/${theme}.css" "$HOME/.config/waybar/style/theme.css"
 safe_link "$HOME/.config/wlogout/colors/${theme}.css" "$HOME/.config/wlogout/colors.css"
+safe_link "$HOME/.config/gtk-4.0/colors/${theme}.css" "$HOME/.config/gtk-4.0/colors.css"
+safe_link "$HOME/.config/gtk-3.0/colors/${theme}.css" "$HOME/.config/gtk-3.0/colors.css"
 
 if command -v swaync &>/dev/null; then
     safe_link "$HOME/.config/swaync/colors/${theme}.css" "$HOME/.config/swaync/colors.css"
+fi
+
+# Ensure gtk-4.0 imports colors.css
+if [[ -L "$HOME/.config/gtk-4.0/gtk.css" ]] && [[ "$(readlink -f "$HOME/.config/gtk-4.0/gtk.css")" == *adw-gtk3* ]]; then
+    rm -f "$HOME/.config/gtk-4.0/gtk.css"
+    echo "@import 'colors.css';" > "$HOME/.config/gtk-4.0/gtk.css"
 fi
 
 # Apply new colors dynamically to Kitty

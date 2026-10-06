@@ -44,7 +44,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("code"))
 
 -- Session / Power
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd(scriptsDir .. "/wlogout.sh 2"))
-hl.bind(mainMod .. " + ALT + X", hl.dsp.exec_cmd(scriptsDir .. "/wlogout.sh 1"))
+-- hl.bind(mainMod .. " + ALT + X", hl.dsp.exec_cmd(scriptsDir .. "/wlogout.sh 1"))
 
 -- Browsers & System
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(scriptsDir .. "/browser.sh op"))

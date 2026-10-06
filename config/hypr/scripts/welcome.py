@@ -681,13 +681,39 @@ class WelcomeApp(Adw.Application):
         self.connect("activate", self.on_activate)
 
     def on_activate(self, app):
+        display = Gdk.Display.get_default()
+
+        # Load active theme colors from ~/.config/gtk-4.0/colors.css or ~/.config/hypr/.cache/.theme
+        theme_file = Path.home() / ".config" / "hypr" / ".cache" / ".theme"
+        active_theme = theme_file.read_text(encoding="utf-8").strip() if theme_file.exists() else "Catppuccin"
+
+        candidates = [
+            Path.home() / ".config" / "gtk-4.0" / "colors" / f"{active_theme}.css",
+            Path.home() / ".config" / "gtk-4.0" / "colors.css",
+            Path(__file__).resolve().parent.parent.parent / "gtk-4.0" / "colors" / f"{active_theme}.css",
+        ]
+        for cand in candidates:
+            if cand.exists():
+                try:
+                    theme_css = cand.read_text(encoding="utf-8")
+                    theme_provider = Gtk.CssProvider()
+                    theme_provider.load_from_data(theme_css.encode("utf-8"))
+                    if display:
+                        Gtk.StyleContext.add_provider_for_display(
+                            display, theme_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+                        )
+                    break
+                except Exception:
+                    pass
+
         provider = Gtk.CssProvider()
         provider.load_from_string(CSS)
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
-        )
+        if display:
+            Gtk.StyleContext.add_provider_for_display(
+                display,
+                provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+            )
         win = WelcomeWindow(app)
         win.present()
 

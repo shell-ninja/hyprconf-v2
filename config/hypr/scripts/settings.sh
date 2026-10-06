@@ -10,6 +10,7 @@ EOF
 
 # Script for setting window border width and roundness.
 setting="$HOME/.config/hypr/confs/configs.conf"
+setting_lua="$HOME/.config/hypr/confs/configs.lua"
 dunst="$HOME/.config/dunst/dunstrc"
 rofiVars="$HOME/.config/rofi/rofi-vars.rasi"
 
@@ -53,6 +54,7 @@ for user_choice in "${primary_choice[@]}"; do
             borderSize=$(gum input --placeholder "Type border width...")
         done
         sed -i "s/\$border = .*/\\\$border = $borderSize/g" "$setting"
+        [[ -f "$setting_lua" ]] && sed -i "s/border = .*/border = $borderSize,/g" "$setting_lua"
         sed -i "s/frame_width = .*/frame_width = $borderSize/g" "$dunst"
         sed -i "s/border-size: .*/border-size: ${borderSize}px;/g" "$rofiVars"
         ;;
@@ -64,6 +66,7 @@ for user_choice in "${primary_choice[@]}"; do
             rounding=$(gum input --placeholder "Type border roundness...")
         done
         sed -i 's/\$rounding = .*/$rounding = '"$rounding"'/g' "$setting"
+        [[ -f "$setting_lua" ]] && sed -i 's/rounding = .*/rounding = '"$rounding"',/g' "$setting_lua"
         sed -i "s/^[[:space:]]*corner_radius[[:space:]]*= .*/corner_radius = $((rounding / 2))/g" "$dunst"
         sed -i "s/radius: .*/radius: ${rounding}px;/g" "$rofiVars"
         sed -i "s/radius-second: .*/radius-second: $((rounding / 2))px;/g" "$rofiVars"
@@ -76,6 +79,7 @@ for user_choice in "${primary_choice[@]}"; do
             gaps_in=$(gum input --placeholder "Type the inner gap...")
         done
         sed -i "s/\$inner_gap = .*/\\\$inner_gap = $gaps_in/g" "$setting"
+        [[ -f "$setting_lua" ]] && sed -i "s/inner_gap = .*/inner_gap = $gaps_in,/g" "$setting_lua"
         ;;
     "outer gap")
         printf "\n[ <> ]\nSetting outer gap...\n\n"
@@ -85,6 +89,7 @@ for user_choice in "${primary_choice[@]}"; do
             gaps_out=$(gum input --placeholder "Type the outer gap...")
         done
         sed -i "s/\$outer_gap = .*/\\\$outer_gap = $gaps_out/g" "$setting"
+        [[ -f "$setting_lua" ]] && sed -i "s/outer_gap = .*/outer_gap = $gaps_out,/g" "$setting_lua"
         ;;
     "blur")
         printf "\n[ <> ]\nSetting blur...\n\n"
@@ -99,7 +104,12 @@ for user_choice in "${primary_choice[@]}"; do
             _blur_passes=$(gum input --placeholder "Type the amount of blur passes...")
         done
         sed -i "s/\$blur_size = .*/\\\$blur_size = $_blur_size/g" "$setting"
+        sed -i "s/\$blur_pass = .*/\\\$blur_pass = $_blur_passes/g" "$setting"
         sed -i "s/\$blur_passes = .*/\\\$blur_passes = $_blur_passes/g" "$setting"
+        if [[ -f "$setting_lua" ]]; then
+            sed -i "s/blur_size = .*/blur_size = $_blur_size,/g" "$setting_lua"
+            sed -i "s/blur_pass = .*/blur_pass = $_blur_passes,/g" "$setting_lua"
+        fi
         ;;
     "opacity")
         printf "\n[ <> ]\nSetting opacity...\n\n"
@@ -115,6 +125,10 @@ for user_choice in "${primary_choice[@]}"; do
         done
         sed -i "s/\$opacity_act = .*/\\\$opacity_act = $_act_op/g" "$setting"
         sed -i "s/\$opacity_deact = .*/\\\$opacity_deact = $_inact_op/g" "$setting"
+        if [[ -f "$setting_lua" ]]; then
+            sed -i "s/opacity_act = .*/opacity_act = $_act_op,/g" "$setting_lua"
+            sed -i "s/opacity_deact = .*/opacity_deact = $_inact_op,/g" "$setting_lua"
+        fi
         ;;
     "shadow")
         printf "\n[ <> ]\nSetting shadow range ( 0 means no shadow )...\n\n"
@@ -124,6 +138,7 @@ for user_choice in "${primary_choice[@]}"; do
             _shd_rng=$(gum input --placeholder "Type the amount of shadow range...")
         done
         sed -i "s/\$shadow_range = .*/\\\$shadow_range = $_shd_rng/g" "$setting"
+        [[ -f "$setting_lua" ]] && sed -i "s/shadow_range = .*/shadow_range = $_shd_rng,/g" "$setting_lua"
         ;;
     *)
         echo "Invalid choice: $user_choice"

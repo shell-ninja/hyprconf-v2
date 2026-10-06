@@ -2,7 +2,8 @@
 
 scrDir="$HOME/.config/hypr/scripts"
 wallpaper="$HOME/.config/hypr/.cache/current_wallpaper.png"
-monitor_config="$HOME/.config/hypr/configs/monitor.conf"
+monitor_config="$HOME/.config/hypr/confs/monitor.conf"
+monitor_lua="$HOME/.config/hypr/confs/monitor.lua"
 
 # Transition config
 FPS=60
@@ -35,11 +36,12 @@ fi
 hyprctl reload
 
 
-#_____ setup monitor ( updated teh monitor.conf for the high resolution and higher refresh rate )
-
- monitor_setting=$(cat $monitor_config | grep "monitor")
+#_____ setup monitor ( updated the monitor config for the high resolution and higher refresh rate )
+ monitor_setting=""
+ [[ -f "$monitor_config" ]] && monitor_setting=$(grep "monitor=, preferred, auto, 1" "$monitor_config" 2>/dev/null || true)
+ [[ -z "$monitor_setting" && -f "$monitor_lua" ]] && monitor_setting=$(grep 'mode[[:space:]]*=[[:space:]]*"preferred"' "$monitor_lua" 2>/dev/null || true)
  monitor_icon="$HOME/.config/hypr/icons/monitor.png"
- if [[ "$monitor_setting" == "monitor=, preferred, auto, 1" ]]; then
+ if [[ -n "$monitor_setting" ]]; then
      notify-send -i "$monitor_icon" "Monitor Setup" "A popup for your monitor configuration will appear within 5 seconds." && sleep 5
      kitty --title monitor sh -c "$scrDir/monitor.sh"
  fi

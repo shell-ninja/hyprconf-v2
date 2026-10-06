@@ -216,8 +216,12 @@ if hostnamectl | grep -q 'Chassis: vm'; then
     msg act "Setting up things for you..." 
     sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/confs/env.conf"
     sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' "$dir/config/hypr/confs/env.conf"
-    mv "$dir/config/hypr/confs/monitor.conf" "$dir/config/hypr/confs/monitor-back.conf"
+    sed -i '/WLR_NO_HARDWARE_CURSORS/s/^--[[:space:]]*//' "$dir/config/hypr/confs/env.lua"
+    sed -i '/WLR_RENDERER_ALLOW_SOFTWARE/s/^--[[:space:]]*//' "$dir/config/hypr/confs/env.lua"
+    mv "$dir/config/hypr/confs/monitor.conf" "$dir/config/hypr/confs/monitor-back.conf" 2>/dev/null || true
+    mv "$dir/config/hypr/confs/monitor.lua" "$dir/config/hypr/confs/monitor-back.lua" 2>/dev/null || true
     cp "$dir/config/hypr/confs/monitor-vbox.conf" "$dir/config/hypr/confs/monitor.conf"
+    cp "$dir/config/hypr/confs/monitor-vbox.lua" "$dir/config/hypr/confs/monitor.lua"
 fi
 
 
@@ -225,9 +229,12 @@ fi
 # uncommenting WLR_NO_HARDWARE_CURSORS if nvidia is detected
 if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -iq nvidia; then
   msg act "Nvidia GPU detected. Setting up proper env's" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") || true
-  sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' config/hypr/configs/environment.conf
-  sed -i '/env = LIBVA_DRIVER_NAME,nvidia/s/^#//' config/hypr/configs/environment.conf
-  sed -i '/env = __GLX_VENDOR_LIBRARY_NAME,nvidia/s/^# //' config/hypr/configs/environment.conf
+  sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/confs/env.conf" 2>/dev/null || true
+  sed -i '/env = LIBVA_DRIVER_NAME,nvidia/s/^#//' "$dir/config/hypr/confs/env.conf" 2>/dev/null || true
+  sed -i '/env = __GLX_VENDOR_LIBRARY_NAME,nvidia/s/^#[[:space:]]*/' "$dir/config/hypr/confs/env.conf" 2>/dev/null || true
+  sed -i '/WLR_NO_HARDWARE_CURSORS/s/^--[[:space:]]*//' "$dir/config/hypr/confs/env.lua" 2>/dev/null || true
+  sed -i '/LIBVA_DRIVER_NAME/s/^--[[:space:]]*//' "$dir/config/hypr/confs/env.lua" 2>/dev/null || true
+  sed -i '/__GLX_VENDOR_LIBRARY_NAME/s/^--[[:space:]]*//' "$dir/config/hypr/confs/env.lua" 2>/dev/null || true
 fi
 
 sleep 1
@@ -293,10 +300,12 @@ ln -sf "$HOME/.config/waybar/style/full-top.css" "$HOME/.config/waybar/style.css
 themeFile="$HOME/.config/hypr/.cache/.theme"
 touch "$themeFile" && echo "Catppuccin" > "$themeFile"
 
-"$HOME/.config/config/hypr/scripts/Wallpaper.sh" &> /dev/null
+"$HOME/.config/hypr/scripts/Wallpaper.sh" &> /dev/null
 
 # hyprland themes
+hyprThemeLua="$HOME/.config/hypr/confs/themes/Catppuccin.lua"
 hyprTheme="$HOME/.config/hypr/confs/themes/Catppuccin.conf"
+ln -sf "$hyprThemeLua" "$HOME/.config/hypr/confs/decoration.lua"
 ln -sf "$hyprTheme" "$HOME/.config/hypr/confs/decoration.conf"
 
 # rofi themes
@@ -331,7 +340,7 @@ crudini --set "$HOME/.config/Kvantum/kvantum.kvconfig" General theme "Catppuccin
 crudini --set ~/.config/kdeglobals Icons Theme "Tela-circle-dracula"
 
 "$HOME/.config/hypr/scripts/wallcache.sh" &> /dev/null
-"$HOME/.config/config/hypr/scripts/Refresh.sh" &> /dev/null
+"$HOME/.config/hypr/scripts/Refresh.sh" &> /dev/null
 
 #############################################
 # setting lock screen

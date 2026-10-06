@@ -19,4 +19,14 @@ case $1 in
     --lock)
         hyprlock
         ;;
+    --suspend)
+        hyprlock &
+        sleep 0.5
+        systemctl suspend
+        ;;
+    --hibernate)
+        hyprlock &
+        sleep 0.5
+        systemctl hibernate
+        ;;
 esac

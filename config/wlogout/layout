@@ -14,14 +14,14 @@
 
 {
     "label": "suspend",
-    "action": "lockscreen.sh & disown && systemctl suspend",
+    "action": "$HOME/.config/hypr/scripts/power.sh --suspend",
     "text": "Suspend",
     "keybind": "u"
 }
 
 {
     "label": "hibernate",
-    "action": "systemctl hibernate",
+    "action": "$HOME/.config/hypr/scripts/power.sh --hibernate",
     "text": "Hibernate",
     "keybind": "h"
 }

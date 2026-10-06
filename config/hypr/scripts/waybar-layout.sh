@@ -9,10 +9,10 @@ waybar_config="$HOME/.config/waybar/config"
 waybar_styles="$HOME/.config/waybar/style"
 waybar_style="$HOME/.config/waybar/style.css"
 script_dir="$HOME/.config/hypr/scripts"
+window_rules="$HOME/.config/hypr/confs/windowrules.lua"
 rofi_config="$HOME/.config/rofi/themes/rofi-waybar.rasi"
 rofi_menu="$HOME/.config/rofi/menu/menu.rasi"
 rofi_clipboard="$HOME/.config/rofi/themes/rofi-clipboard.rasi"
-env="$HOME/.config/hypr/confs/env.conf"
 
 # Function to display menu options
 menu() {
@@ -32,52 +32,48 @@ apply_config() {
     ln -sf "$layout_file" "$waybar_config"
     ln -sf "$style_file" "$waybar_style"
 
-    if [[ "$1" == "full-top" || "$1" == "rounded-top" ]]; then
-        echo "Enabling blur in $env"
-        sed -i "/^#blurls = waybar$/ s/#//" "$env"
-        sed -i "/^#blurls = waybar$/d" "$env"
-    else
-        echo "Disabling blur in $env"
-        sed -i "/^blurls = waybar$/ s/^/#/" "$env"
+    # Window rule (blur) for Waybar in Lua
+    if [[ -f "$window_rules" ]]; then
+        if [[ "$1" == "full-top" || "$1" == "rounded-top" ]]; then
+            sed -i '/match = { namespace = "waybar" }/ s/blur = false/blur = true/' "$window_rules"
+        else
+            sed -i '/match = { namespace = "waybar" }/ s/blur = true/blur = false/' "$window_rules"
+        fi
     fi
 
-    if [[ "$1" == *"-top"* && ! "$1" == "dual-tone-top" && ! "$1" == "rounded-top" ]]; then
-        sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
-        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
-        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
+    # Adjust Rofi menu position
+    if [[ "$1" == *"-top"* && ! "$1" == "dual-tone-top" && ! "$1" == "rounded-top" && ! "$1" == "border-top" ]]; then
+        [[ -f "$rofi_menu" ]] && sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
+    fi
 
-        sed -i "s/location:.*/location: northEast;/g" "$rofi_clipboard"
-        sed -i "s/anchor:.*/anchor: northeast;/g" "$rofi_clipboard"
-        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_clipboard"
-        sed -i "s/x-offset:.*/x-offset: -15px;/g" "$rofi_clipboard"
-
-    elif [[ "$1" == *"dual-tone-top"* || "$1" == *"rounded-top"* ]]; then
-        sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
-        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
-        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
-
-        sed -i "s/location:.*/location: northWest;/g" "$rofi_clipboard"
-        sed -i "s/anchor:.*/anchor: northWest;/g" "$rofi_clipboard"
-        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_clipboard"
-        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_clipboard"
-
-    elif [[ "$1" == *"-bottom"* ]]; then
-        sed -i "s/location:.*/location: southWest;/g" "$rofi_menu"
-        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
-        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_menu"
-
-        sed -i "s/location:.*/location: southeast;/g" "$rofi_clipboard"
-        sed -i "s/anchor:.*/anchor: southeast;/g" "$rofi_clipboard"
-        sed -i "s/x-offset:.*/x-offset: -15px;/g" "$rofi_clipboard"
-        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_clipboard"
-
-    elif [[ "$1" == *"-left"* ]]; then
-        sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
-        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
-        sed -i "s/y-offset:.*/y-offset: 20px;/g" "$rofi_menu"
-
-        sed -i "s/location:.*/location: center;/g" "$rofi_clipboard"
-        sed -i "s/anchor:.*/anchor: center;/g" "$rofi_clipboard"
+    # Adjust clipboard rofi position based on selected waybar layout
+    if [[ -f "$rofi_clipboard" ]]; then
+        case "$1" in
+            "minimal-bottom")
+                sed -i 's/location:.*/location: southEast;/' "$rofi_clipboard"
+                sed -i 's/anchor:.*/anchor: southeast;/' "$rofi_clipboard"
+                sed -i 's/x-offset:.*/x-offset: -15px;/' "$rofi_clipboard"
+                sed -i 's/y-offset:.*/y-offset: -60px;/' "$rofi_clipboard"
+                ;;
+            "rounded-top"|"dual-tone-top")
+                sed -i 's/location:.*/location: northWest;/' "$rofi_clipboard"
+                sed -i 's/anchor:.*/anchor: northwest;/' "$rofi_clipboard"
+                sed -i 's/x-offset:.*/x-offset: 15px;/' "$rofi_clipboard"
+                sed -i 's/y-offset:.*/y-offset: 40px;/' "$rofi_clipboard"
+                ;;
+            "bar-left"|"skew-left")
+                sed -i 's/location:.*/location: northWest;/' "$rofi_clipboard"
+                sed -i 's/anchor:.*/anchor: northwest;/' "$rofi_clipboard"
+                sed -i 's/x-offset:.*/x-offset: 50px;/' "$rofi_clipboard"
+                sed -i 's/y-offset:.*/y-offset: 15px;/' "$rofi_clipboard"
+                ;;
+            *)
+                sed -i 's/location:.*/location: northEast;/' "$rofi_clipboard"
+                sed -i 's/anchor:.*/anchor: northeast;/' "$rofi_clipboard"
+                sed -i 's/x-offset:.*/x-offset: -15px;/' "$rofi_clipboard"
+                sed -i 's/y-offset:.*/y-offset: 40px;/' "$rofi_clipboard"
+                ;;
+        esac
     fi
 
     restart_waybar
@@ -85,11 +81,9 @@ apply_config() {
 
 # Restart Waybar
 restart_waybar() {
-    killall waybar
-    sleep 0.1  # Delay for Waybar to completely terminate
+    killall waybar 2>/dev/null || true
+    sleep 0.1
     waybar &
-    sleep 0.5
-    hyprctl reload
 }
 
 # Main function
@@ -110,3 +104,6 @@ if pgrep -x "rofi" &> /dev/null; then
 fi
 
 main
+
+sleep 0.5
+hyprctl reload &>/dev/null || true

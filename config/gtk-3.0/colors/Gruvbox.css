@@ -1,0 +1,39 @@
+/* Gruvbox Dark for GTK-4 / Libadwaita */
+@define-color accent_color #fe8019;
+@define-color accent_bg_color #fe8019;
+@define-color accent_fg_color #1d2021;
+
+@define-color window_bg_color #282828;
+@define-color window_fg_color #ebdbb2;
+
+@define-color view_bg_color #282828;
+@define-color view_fg_color #ebdbb2;
+
+@define-color headerbar_bg_color #1d2021;
+@define-color headerbar_fg_color #ebdbb2;
+@define-color headerbar_border_color rgba(235, 219, 178, 0.08);
+@define-color headerbar_backdrop_color #1d2021;
+
+@define-color card_bg_color #3c3836;
+@define-color card_fg_color #ebdbb2;
+@define-color card_border_color rgba(235, 219, 178, 0.08);
+
+@define-color popover_bg_color #1d2021;
+@define-color popover_fg_color #ebdbb2;
+
+@define-color dialog_bg_color #282828;
+@define-color dialog_fg_color #ebdbb2;
+
+@define-color sidebar_bg_color #1d2021;
+@define-color sidebar_fg_color #ebdbb2;
+
+@define-color secondary_sidebar_bg_color #1d2021;
+@define-color secondary_sidebar_fg_color #ebdbb2;
+
+/* GTK3 compat */
+@define-color theme_bg_color #282828;
+@define-color theme_fg_color #ebdbb2;
+@define-color theme_base_color #282828;
+@define-color theme_text_color #ebdbb2;
+@define-color theme_selected_bg_color #fe8019;
+@define-color theme_selected_fg_color #1d2021;

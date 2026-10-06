@@ -127,7 +127,7 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 >
 > ### Hyprland
 >
-> To configure hyprland settings, you can visit to `~/.config/hypr` directory. Inside it, you will fine `configs` dir, holding all the configuration files; `scripts` dir for all the scripts.
+> To configure Hyprland settings, visit the `~/.config/hypr` directory. Main configuration is `hyprland.lua` using the latest Hyprland Lua syntax. The `confs/` directory holds modular Lua configurations (`settings.lua`, `keybinds.lua`, `windowrules.lua`, `animations.lua`, `env.lua`, `monitor.lua`, and themes in `themes/*.lua`), and the `scripts/` directory holds helper scripts.
 > Wallpapers are stored in the `~/.config/hypr/Wallpapers/__theme_name/` directory. Just copy your favourite wallpapers into this directory.
 >
 > ### Rofi

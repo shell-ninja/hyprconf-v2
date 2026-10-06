@@ -63,8 +63,7 @@ hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(scriptsDir .. "/settings.py &> /dev/n
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('kitty --title browser sh -c "' .. scriptsDir .. '/settings.sh"'))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(scriptsDir .. "/theme_select.sh"))
 hl.bind(mainMod .. " + ALT + U", hl.dsp.exec_cmd('kitty sh -c "' .. scriptsDir .. '/uninstall.sh"'))
-hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd('notify-send "Colors" "Re-generating colors." && ' .. scriptsDir .. '/pywal.sh'))
-hl.bind("F8", hl.dsp.exec_cmd(scriptsDir .. "/secure_mode.sh"))
+-- hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd('notify-send "Colors" "Re-generating colors." && ' .. scriptsDir .. '/pywal.sh'))
 
 -- Switch window / Rofi
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("rofi -show window -theme ~/.config/rofi/themes/rofi-window.rasi"))

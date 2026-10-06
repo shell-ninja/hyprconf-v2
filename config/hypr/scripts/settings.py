@@ -78,7 +78,7 @@ SDDM_FACES_DIR = Path("/usr/share/sddm/faces")
 # ─── Dotfiles repo (Dotfiles Update section) ──────────────────────────────
 DOTFILES_REPO_OWNER = "shell-ninja"
 DOTFILES_REPO_NAME = "hyprconf-V2"
-DOTFILES_BRANCH = "development"
+DOTFILES_BRANCH = "main"
 
 CACHE_HOME = Path(os.environ.get("XDG_CACHE_HOME", str(Path.home() / ".cache")))
 DOTFILES_CACHE_DIR = CACHE_HOME / "hypr-settings" / "dotfiles"

@@ -156,9 +156,6 @@ case $1 in
     --check)
         check_update  # Check for available updates
         ;;
-    --update)
-        package_update  # Perform package update
-        ;;
     *)
         echo "Invalid option. Use 'cu' to check for updates or 'up' to update packages."
         ;;

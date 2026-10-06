@@ -170,8 +170,8 @@ This Hyprland configuration version is not for Dynamic Color Changing. It's a Th
 
 ```shell
   cd ~/hyprconf-v2
-  chmod +x hyprconf-v2.sh
-  ./hyprconf-v2.sh
+  chmod +x setup.sh
+  ./setup.sh
 ```
 
 <br>

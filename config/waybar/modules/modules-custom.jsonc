@@ -15,8 +15,8 @@
     // power menu ( universal )
     "custom/power_btn": {
         "format": "",
-        "tooltip": false,
-        "on-click": "wlogout -b 6 --layout ~/.config/wlogout/layout --css ~/.config/wlogout/style.css",
+        "on-click": "~/.config/hypr/scripts/wlogout.sh 1",
+        "tooltip": false
     },
 
     "custom/notify": {
@@ -47,7 +47,8 @@
         "exec": "~/.config/hypr/scripts/systemupdate.sh --check",
         "return-type": "json",
         "format": " {}",
-        "on-click": "~/.config/hypr/scripts/systemupdate.sh --update",
+        "on-click": "~/.config/hypr/scripts/pkgupdate-gui.py",
+        "on-click-right": "~/.config/hypr/scripts/systemupdate.sh --update",
         "interval": 86400,
         "tooltip": true
     },
@@ -132,5 +133,20 @@
         "format": "󰿅",
         "tooltip-format": "logout" ,
         "on-click": "~/.config/hypr/scripts/power.sh --logout"
+    },
+
+    // Theme (dark light)
+    "custom/theme": {
+        "format": " ",
+        "tooltip-format": "Toggle Dark/Light theme",
+        "on-click": "~/.config/hypr/scripts/dark_light.sh"
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh --inc",
+        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh --dec",
+        "orientation": "vertical"
     }
 }

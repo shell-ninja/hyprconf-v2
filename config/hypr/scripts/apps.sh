@@ -1,40 +1,37 @@
 #!/bin/bash
 
-case $1 in
-    fb)
-        url="https://www.facebook.com"
-        ;;
-    yt)
-        url="https://www.youtube.com"
-        ;;
-    ai)
-        url="https://chat.openai.com"
-        ;;
-    gem)
-        url="https://gemini.google.com/app"
-        ;;
-    wapp)
-        url="https://web.whatsapp.com"
-        ;;
-    github)
-        url="https://github.com"
-        ;;
-    ps)
-        url="https://www.photopea.com/"
-        ;;
-    *)
-        echo "Usage: $0 {fb|yt|ai|wapp|github}"
-        exit 1
-        ;;
-esac
+# apps.sh — Open web apps / websites with preferred browser
 
-# Define the browsers in the order of preference
-browser_cache="$HOME/.config/hypr/.cache/.browser"
-browser=$(grep "default" "$browser_cache" | awk -F'=' '{print $2}')
+open_site() {
+    local site_name=$1
+    local url=""
 
-# Loop through the browsers and try to open the URL with the first available one
-if [[ ! "$browser" == "firefox" ]]; then
-    "$browser" --app="$url"
-elif [[ "$browser" == "firefox" || "$browser" == "zen-browser" ]]; then
-    "$browser" --new-window "$url"
-fi
+    if [[ "$site_name" =~ ^https?:// ]]; then
+        url="$site_name"
+    elif [[ "$site_name" == *"."* ]]; then
+        url="https://${site_name}"
+    else
+        case "$site_name" in
+            fb|facebook)        url="https://www.facebook.com" ;;
+            yt|youtube)         url="https://www.youtube.com" ;;
+            ai|chatgpt)         url="https://chatgpt.com" ;;
+            gem|gemini)         url="https://gemini.google.com/app" ;;
+            wapp|whatsapp)      url="https://web.whatsapp.com" ;;
+            github)             url="https://github.com" ;;
+            ps|photopea)        url="https://www.photopea.com/" ;;
+            *)                  url="https://${site_name}.com" ;;
+        esac
+    fi
+
+    browser_cache="$HOME/.config/hypr/.cache/.browser"
+    browser=$(grep "default" "$browser_cache" 2>/dev/null | awk -F'=' '{print $2}')
+    [ -z "$browser" ] && browser="brave"
+
+    if [[ ! "$browser" == "firefox" && ! "$browser" == "zen-browser" ]]; then
+        "$browser" --app="$url"
+    else
+        "$browser" --new-window "$url"
+    fi
+}
+
+open_site "$1"

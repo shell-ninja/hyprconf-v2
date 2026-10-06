@@ -71,6 +71,7 @@ safe_link() {
 }
 
 # Apply UI Themes
+safe_link "$HOME/.config/hypr/confs/themes/${theme}.lua" "$HOME/.config/hypr/confs/decoration.lua"
 safe_link "$HOME/.config/hypr/confs/themes/${theme}.conf" "$HOME/.config/hypr/confs/decoration.conf"
 safe_link "$HOME/.config/rofi/colors/${theme}.rasi" "$HOME/.config/rofi/themes/rofi-colors.rasi"
 safe_link "$HOME/.config/kitty/colors/${theme}.conf" "$HOME/.config/kitty/theme.conf"
